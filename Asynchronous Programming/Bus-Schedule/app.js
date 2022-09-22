@@ -7,17 +7,17 @@
     let dataName = ""
 
     async function depart() {
-       takeInfoBuse(nextStop);
+       takeInfoBus(nextStop);
        templateInfo(`Next stop ${dataName}`,true,false)
     }
 
     async function arrive() {
-          takeInfoBuse(nextStop)
+          takeInfoBus(nextStop)
           templateInfo(`Arriving at ${dataName}`,false,true)
 
     }
 
-    async function takeInfoBuse(name) {
+    async function takeInfoBus(name) {
        try { 
             let response = await fetch(`http://localhost:3030/jsonstore/bus/schedule/${name}`)
             let data = await response.json();
