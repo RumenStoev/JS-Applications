@@ -26,7 +26,7 @@ async function getInfo() {
 	     let li = document.createElement("li");
 	     let template = `Bus ${busId} arrives in ${time} minutes`
 	         li.innerHTML = template;
-            listBuses.appendChild(li)
+                 listBuses.appendChild(li)
    }
 }
 
