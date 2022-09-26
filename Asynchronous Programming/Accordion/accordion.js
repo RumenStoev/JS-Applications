@@ -24,7 +24,7 @@ let structureTemplate = (text,id,info) => {
     `
     divAccordion.innerHTML = template
 
-    let button = divAccordion.querySelector("button")
+let button = divAccordion.querySelector("button")
         button.addEventListener("click",function(event) {
            let currExtra = divAccordion.querySelector(".extra") 
               if(button.textContent === "More") {
@@ -38,19 +38,23 @@ let structureTemplate = (text,id,info) => {
 
     containerArticles.appendChild(divAccordion)
 }
- 
+
+let displayData = async () => {
+    let dataList = await articleList("list");
+    
+     dataList.map(item => {
+        let[id,title] = Object.values(item);
+        let moreInfoArticle = articleList(`/details/${id}`)
+        
+        moreInfoArticle.then(info => {
+            structureTemplate(title,id,info.content)
+          
+        })
+    }) 
+ }
 
 async function solution() {
-     let dataList = await articleList("list");
-      dataList.map(item => {
-          let[id,title] = Object.values(item);
-          let moreInfoArticle = articleList(`/details/${id}`)
-          
-          moreInfoArticle.then(info => {
-              structureTemplate(title,id,info.content)
-            
-          })
-      }) 
+     return await displayData()
 }
 
 
