@@ -2,9 +2,10 @@ let Posts = {}
 
 let takePosts = async(url) => {
  try {
-   let response = await fetch(`http://localhost:3030/jsonstore/blog/${url}`)
-   let data = await response.json();
-    return data
+      let response = await fetch(`http://localhost:3030/jsonstore/blog/${url}`)
+      let data = await response.json();
+       
+       return data
    
   } catch(e) {
         throw new Error(e)
@@ -13,16 +14,16 @@ let takePosts = async(url) => {
 
 let takeComments = async() => {
   try {
-        let response = await fetch(`http://localhost:3030/jsonstore/blog/comments`)
-        let data = await response.json()
+    
+      let response = await fetch(`http://localhost:3030/jsonstore/blog/comments`)
+      let data = await response.json()
+    
        return data;
     
     } catch(e) {
         throw new Error(e)
     }
 }
-
-
 
 let appendPostsToSelectTag = async (url,sectionId) => {
    
@@ -38,6 +39,7 @@ let appendPostsToSelectTag = async (url,sectionId) => {
 }
 
 let appendCommentsToList = async(currentOption,textPosts,listComments) => {
+    
     return await takeComments().then(comments => {
        
         Object.values(comments).forEach(comment => {
@@ -52,10 +54,12 @@ let appendCommentsToList = async(currentOption,textPosts,listComments) => {
     
 }
 
-/////////////////////////////DOM State///////////////////////////////////
+///////////DOM State///////////////////////////////////
 let section = document.getElementById("posts");
 
 let renderComment = (id,text) => `<li id=${id}>${text}</li>`
+
+let templatePosts = (value,text) => `<option value=${value}>${text}</option>`
 
 let renderPostAndComments = (title,body) => {
     let postTitle = document.getElementById("post-title")
@@ -68,8 +72,7 @@ let renderPostAndComments = (title,body) => {
         h2.textContent = "Comments";
 }
 
-let templatePosts = (value,text) => `<option value=${value}>${text}</option>`
-
+/////////////////////////////////Buttons//////////////////////////////////
 let buttonLoadPosts = async() => {
     let btnLoadPosts = document.getElementById("btnLoadPosts")
       return await btnLoadPosts.addEventListener("click", async() => {
@@ -79,17 +82,19 @@ let buttonLoadPosts = async() => {
 
 let buttonViewPosts = async() => {
   let btnViewPost = document.getElementById("btnViewPost")
-  return await btnViewPost.addEventListener("click", async () =>{
-       let listComments = document.getElementById("post-comments");
-       let currentOption = section.options[section.selectedIndex]
-       listComments.innerHTML = ""
+
+    return await btnViewPost.addEventListener("click", async () =>{
+  
+          let listComments = document.getElementById("post-comments");
+          let currentOption = section.options[section.selectedIndex]
+              listComments.innerHTML = ""
       
-      return await appendCommentsToList(currentOption,Posts,listComments)
-       
+        return await appendCommentsToList(currentOption,Posts,listComments)    
     })
 }
+////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 
 
 async function attachEvents() {
@@ -101,5 +106,6 @@ async function attachEvents() {
 }
 
 attachEvents();
+
 
 
