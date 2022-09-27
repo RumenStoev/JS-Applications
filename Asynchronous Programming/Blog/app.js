@@ -73,14 +73,14 @@ let renderPostAndComments = (title,body) => {
 }
 
 /////////////////////////////////Buttons//////////////////////////////////
-let buttonLoadPosts = async() => {
+let loadPosts = async() => {
     let btnLoadPosts = document.getElementById("btnLoadPosts")
       return await btnLoadPosts.addEventListener("click", async() => {
           return await appendPostsToSelectTag("posts",section)
         })
 }
 
-let buttonViewPosts = async() => {
+let viewPosts = async() => {
   let btnViewPost = document.getElementById("btnViewPost")
 
     return await btnViewPost.addEventListener("click", async () =>{
@@ -98,8 +98,8 @@ let buttonViewPosts = async() => {
 
 
 async function attachEvents() {
-   return await buttonLoadPosts()
-                .then(buttonViewPosts)
+   return await loadPosts()
+                .then(viewPosts)
                 .catch(error => {
                     throw new Error(error)
                 })
