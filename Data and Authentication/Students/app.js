@@ -6,8 +6,8 @@ let getStudents = async(url) => {
 	try {
 	  return await fetch(url)
 	                  .then(data => {
-						           return data.json()
-					         })
+		        return data.json() })
+					        
 	} catch(err) {
 		throw new Error(err)
 	}
@@ -46,14 +46,14 @@ let displayStudentsData = () => {
 }
 
 let displayTable = (data) => {
-	let tbody = document.querySelector("tbody");
+  let tbody = document.querySelector("tbody");
   let td = (text) => `<td>${text}</td>`
        
 	tbody.innerHTML = ""
 
 	Object.values(data).forEach(item => {
 	   	let tr = document.createElement("tr")
-		  let dataStudent = [item.firstName,item.lastName,item.number,item.grade]
+		let dataStudent = [item.firstName,item.lastName,item.number,item.grade]
 		  dataStudent.forEach(x => tr.innerHTML+=td(x))
 		  tbody.appendChild(tr)
 	  })
