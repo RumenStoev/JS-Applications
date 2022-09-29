@@ -32,14 +32,14 @@ let listUsers = document.getElementById("phonebook")
 let appendUsersToList = (users) => {
 	listUsers.innerHTML = ""
 
-	 Object.values(users).forEach(user => {
+         Object.values(users).forEach(user => {
 		
 		let li = document.createElement("li")
-	      li.setAttribute("id","phonebook")	
+	            li.setAttribute("id","phonebook")	
 		    li.textContent = `${user.person}: ${user.phone}`
 
-		   li.appendChild(btnDelete(user._id))
-	   	 listUsers.appendChild(li)
+		    li.appendChild(btnDelete(user._id))
+		    listUsers.appendChild(li)
 	})
       
 }
@@ -49,32 +49,30 @@ let appendUsersToList = (users) => {
 btnCreate.addEventListener("click", async() => {
 	return await sendData(url,{person:person.value,phone:phone.value})
 	                    .then(data => {
-					                 	return loadData(url)})
-					          	.then(users => {
-							             appendUsersToList(users)
-						           })					
+			         return loadData(url)
+			  }).then(users => {
+			        appendUsersToList(users)})
+					
 })
 
 btnLoad.addEventListener("click", async() => {
-    return await loadData(url)
-	                   .then(users => {
-						              appendUsersToList(users)})	
-					   	  
+    return await loadData(url).then(users => appendUsersToList(users))		  
 })
 
 
 let btnDelete = (userId) => {
-	let buttonDelete = document.createElement("button")
-		  buttonDelete.setAttribute("id",`${userId}`)
-	    buttonDelete.textContent = "Delete"
+    let buttonDelete = document.createElement("button")
+        buttonDelete.setAttribute("id",`${userId}`)
+	buttonDelete.textContent = "Delete"
 
 	buttonDelete.addEventListener("click",async(event) => {
-		 let currentButton = event.target.parentNode
-		 let id = event.target.getAttribute("id")
+		let currentButton = event.target.parentNode
+		let id = event.target.getAttribute("id")
 
-	      	deleteData(url,id)
-		      currentButton.remove()
+		deleteData(url,id)
+		currentButton.remove()
      })
+	
    return buttonDelete
 }
 ///////////////////////////////////////////////////////////////////
