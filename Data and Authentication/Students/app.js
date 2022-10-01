@@ -24,7 +24,7 @@ let displayStudentsData = async () => {
 	let data = document.getElementById("form")
   
 	 submitButton.addEventListener("click",async(e) => {
-          e.preventDefault()
+              e.preventDefault()
 	    
 	     let dataStudent = new FormData(data);
 		
@@ -34,11 +34,9 @@ let displayStudentsData = async () => {
 		
            return getStudents(urlStudents)
 		 
-          }).then(data => {
-			
-              displayTable(data)
-		 })	 
-	 })
+           })
+	   .then(data => displayTable(data))	 
+	  })
 }
 
 let displayTable = (data) => {
