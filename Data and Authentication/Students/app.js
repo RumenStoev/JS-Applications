@@ -28,9 +28,7 @@ let displayStudentsData = async () => {
 	    
 	     let dataStudent = new FormData(data);
 		
-		 dataStudent = [...dataStudent.entries()]
-		
-                 dataStudent = Object.fromEntries(dataStudent)
+		 dataStudent = Object.fromEntries([...dataStudent.entries()])
 		
 	       await sendStudent(dataStudent).then(data => {
 		
