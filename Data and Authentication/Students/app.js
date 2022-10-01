@@ -29,8 +29,8 @@ let displayStudentsData = () => {
           e.preventDefault()
 	    let [name,lastName,number,grade] = data;
 
-		  await sendStudent({
-	      		firstName:name.value,
+		 await sendStudent({
+	      		      firstName:name.value,
 			      lastName:lastName.value,
 			      number:number.value,
 			      grade:grade.value
