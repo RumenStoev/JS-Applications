@@ -19,11 +19,12 @@ async function PostForm() {
     postButton.addEventListener("click",(e) => {
         e.preventDefault();
         let formData = takePostFormData(postForm)
-        sendPost(formData)
-                                   .then(getPosts)
-                                   .then(takeLastTopic)
-                                   .then(topicTemplate)
-                                   .catch(err => console.error(err))
+                       
+          sendPost(formData)
+                    .then(getPosts)
+                    .then(takeLastTopic)
+                    .then(topicTemplate)
+                    .catch(err => console.error(err))
          
 
     })
