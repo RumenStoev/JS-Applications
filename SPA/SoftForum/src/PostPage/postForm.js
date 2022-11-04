@@ -2,10 +2,10 @@ import { takePostFormData, clearInputFields, takeLastTopic } from "../filters.js
 import { sendPost,getPosts } from "../requests.js"
 import { topicTemplate } from "../templates.js";
 
-let postForm = document.querySelector("body > div > main > div.new-topic-border > form");
-let fieldForm = document.querySelectorAll("#topicName, #username, #postText")
-let postButton = document.querySelector(".public");
-let cancelButton = document.querySelector(".cancel");
+  let postForm = document.querySelector("body > div > main > div.new-topic-border > form");
+  let fieldForm = document.querySelectorAll("#topicName, #username, #postText")
+  let postButton = document.querySelector(".public");
+  let cancelButton = document.querySelector(".cancel");
 
 
 
