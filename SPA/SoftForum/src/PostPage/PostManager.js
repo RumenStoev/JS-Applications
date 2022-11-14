@@ -1,9 +1,14 @@
 import { PostForm } from "./PostEngine/postForm.js";
-import { RenderTopics} from "./PostEngine/renderTopics.js";
+import { RenderTopics } from "./PostEngine/renderAllTopics.js";
 
 
-//Every Topic has reference to CommentPage!
 
 
-await RenderTopics()
-await PostForm()
+async function PostPage() {
+    await RenderTopics()
+    await PostForm()
+}
+
+
+
+export { PostPage }
