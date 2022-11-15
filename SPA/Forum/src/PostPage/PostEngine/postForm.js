@@ -8,30 +8,22 @@ let postForm = document.getElementById("postForm")
 let fieldsForm = document.querySelectorAll("#topicName, #username, #postText")
 
 
-async function PostForm() {
- 
-    document.addEventListener("click",async(e) => {
-        e.preventDefault()
 
-        let currButton = e.target.className;
-   
-        if(typeof casePostPage[currButton] === "function" ) { 
-            casePostPage[currButton]()
-        }  
-    })
-}
+async function PostForm(clickedButton) {
+     if(clickedButton === "public") return await btnPost()
+     
+     if(clickedButton === "cancel") return await btnCancel()
 
-let casePostPage = {
-    "cancel":  await btnCancel,
-    "public":  await btnPost
 }
 
 async function btnPost() {
     return await getDataForm(postForm)
-                    .then(topicTemplate)
-                    .then(sendPost)
-                    .then(clearInputFields(fieldsForm))
-    
+                       .then(data => {
+                          topicTemplate(data)
+                       return data
+                       })
+                       .then(sendPost) 
+                       .then(clearInputFields(fieldsForm))
 }
 
 async function btnCancel() {
