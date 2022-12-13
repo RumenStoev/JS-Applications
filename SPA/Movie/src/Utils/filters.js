@@ -22,7 +22,7 @@ let isValidForm = async (formData,requirements,errorMsg) => {
  }
 
 
- let throwError = (msg) => { //Two storages one for Developer one for a client!
+ let throwError = (msg) => {
       throw new Error(msg)
  } 
 
