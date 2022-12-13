@@ -1,27 +1,36 @@
-import { registerUserProcess } from "./Components/Nav-Bar/RegisterPage/registerPage.js"
+import { registerUserProcess } from "./Components/Nav-Bar/RegisterPage/registerDataProcess.js"
 import { loginUserProcess } from "./Components/Nav-Bar/LoginPage/loginPage.js"
+import { router } from "./Router.js"
 
 
+document.addEventListener("DOMContentLoaded",(e) => {
 
-document.addEventListener("click",(e) => {
+  document.addEventListener("click",(e) => {
      e.preventDefault()
+       
+     let currentForm = e.target.parentElement.id
       
-      let currentForm = e.target.parentNode.id
-     
-      formsById[currentForm](e,currentForm)
-     
+     if(formsById.hasOwnProperty(currentForm)) {
+            formsById[currentForm]()
+      }
+
+  })
+
+  router()
+
 })
 
-
-
 let formsById = { 
-    "form-sign-up":async() => await registerUserProcess(),
+    "register-form":async() => await registerUserProcess(),
     "form-login": async () => await loginUserProcess(),
     "edit-movie":() => {},
     "add-movie":() => {},
     "register":(e,path) => router(),
     "login":() => console.log("login"),
     "logout":() => console.log("logout"),
-    "delete":() => console.log("delete")
-    
+    "delete":() => console.log("delete")   
 }
+
+
+
+
