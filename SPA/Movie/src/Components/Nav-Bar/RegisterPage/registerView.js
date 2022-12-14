@@ -1,6 +1,20 @@
 let registerTemplate = () => {
    
     return `
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand text-light" href="/" id="header-nav-bar">Movies</a>
+        <ul class="navbar-nav ml-auto">
+          
+          <li class="nav-item guest" id="login">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item guest" id="register">
+            <a class="nav-link" href="http://localhost:4000/register">Register</a>
+          </li>
+        </ul>
+      </nav>
+    
+
     <section id="form-sign-up" class="view-section">
     <form
       id="register-form"
