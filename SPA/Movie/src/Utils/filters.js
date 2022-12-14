@@ -1,9 +1,9 @@
 
-let getDataForm = (formTag) => Object.fromEntries([...new FormData(formTag).entries()])
+let getDataForm = async (formTag) => Object.fromEntries([...new FormData(formTag).entries()])
 
-let isValidForm = async (formData,requirements,errorMsg) => {
+let isValidForm = async (formData,requirements) => {
 
-    let dataForm = getDataForm(formData)    
+    let dataForm = await getDataForm(formData)    
     
     let checkFormData = Object.values(dataForm);
 
@@ -12,22 +12,28 @@ let isValidForm = async (formData,requirements,errorMsg) => {
       Object.values(requirements).forEach((checkForm,i) => {
         
             if(!checkForm(checkFormData[i],checkFormData[i - 1])) {
-                throwError(errorMsg)      
+                throwError("The requirements have not matched!")      
             }
             
     });
- }
+  }
     return dataForm
    
  }
 
 
- let throwError = (msg) => {
+ let throwError = (msg) => { //Two storages one for Developer one for a client!
       throw new Error(msg)
  } 
 
  let redirectToHomePage = (statusRequest) => {
-    if(statusRequest === "OK") window.location.replace("http://localhost:4000/")
+       console.log(statusRequest)
+    if(statusRequest === 200 || statusRequest === undefined) {
+       window.location.replace("http://localhost:4000/")
+    }
+      else {
+         throw new Error("You have no permissions to Access!")
+      }
  }
 
 
