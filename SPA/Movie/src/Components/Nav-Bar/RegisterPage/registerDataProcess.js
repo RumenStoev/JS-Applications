@@ -6,7 +6,7 @@ async function registerUserProcess() {
       
   const registerForm = document.querySelector("#register-form")
 
-    return await isValidForm(registerForm,validRulesForm,"Has an Error!!!")    
+    return await isValidForm(registerForm,validRulesForm)    
                            .then(registerUser)
                            .then(redirectToHomePage)
                            .catch(err => console.error(err))
