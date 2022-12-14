@@ -95,6 +95,7 @@ async function revokeLike(likeId) {
 } 
 
 
+
 async function registerUser(data) {
    try {
     let request =  await fetch(serverURL + usersRegister,{
@@ -104,27 +105,45 @@ async function registerUser(data) {
     },
         body: JSON.stringify(data)
     })
+    
     if(request.ok) {
         const dataRequest = await request.json();
 
         sessionStorage.setItem("data",JSON.stringify(dataRequest))
-		return request.statusText
+		return request.status
     }
   } catch(e) {
     catchError(e)
  }
             
 }
-async function loginUser(data) { // try/catch block is necessary
-    return await fetch(serverURL + usersLogin,{
+
+async function loginUser(data) {
+   
+    try {
+
+        let request = await fetch(serverURL + usersLogin, {
         method: "post",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify(data)
     })
     
-    .catch(catchError)
+     if(request.ok) {
+        sessionStorage.setItem("loginData",JSON.stringify(request.json()))
+        return request.status
+     }else {
+        return request.status
+     }
+    
+    
+ } catch(e) {
+    
+   catchError(e)
+ }
+   
                 
 }
+
 
 
 let isValidJSON = async(data) => {
