@@ -12,7 +12,7 @@ let isValidForm = async (formData,requirements) => {
       Object.values(requirements).forEach((checkForm,i) => {
         
             if(!checkForm(checkFormData[i],checkFormData[i - 1])) {
-                throwError("The requirements have not matched!")      
+                throwError("The Form is incorrect filled")      
             }
             
     });
