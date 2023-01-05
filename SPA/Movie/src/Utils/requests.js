@@ -1,5 +1,5 @@
 
-import { redirectToLoginPage } from "./filters.js"
+import {accessToken, redirectToLoginPage } from "./filters.js"
 
 let serverURL = `http://localhost:3030/`
 let moviePath = `data/movies`
@@ -8,9 +8,7 @@ let usersRegister = `users/register`
 let usersLogin = `users/login`
 
 
-////AccessToken for the Server////
-let accessToken = JSON.parse(sessionStorage.getItem("loginData")).accessToken
-/////////////////////////////////
+
 
 async function getMovies() {
     return await fetch(serverURL + moviePath)
@@ -24,7 +22,7 @@ async function createMovie(data) {
         method: "post",
         headers: {
             "Content-Type": "application/json",
-            'X-Authorization': accessToken
+            'X-Authorization': accessToken()
 
         },
         body: JSON.stringify(data)
@@ -43,7 +41,7 @@ async function updateMovie(data, id) {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
-                "X-Authorization": accessToken
+                "X-Authorization": accessToken()
             },
             body: JSON.stringify(data)
         })
@@ -63,7 +61,7 @@ async function deleteMovie(id) {
         method: "delete",
         headers: {
             "Content-Type": "application/json",
-            "X-Authorization": accessToken
+            "X-Authorization": accessToken()
         }
     })
         .then(request => request.status)
@@ -101,7 +99,7 @@ async function addLike(id) {
         method: "post",
         headers: {
             "Content-Type": "application/json",
-            "X-Authorization": accessToken
+            "X-Authorization": accessToken()
         },
         body: JSON.stringify({ movieId: id })
     })
@@ -115,7 +113,7 @@ async function revokeLike(likeId) {
         method: "delete",
         headers: {
             "Content-Type": "application/json",
-            "X-Authorization": accessToken
+            "X-Authorization": accessToken()
         }
     })
         .then(request => request.json())
