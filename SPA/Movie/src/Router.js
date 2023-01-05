@@ -1,5 +1,8 @@
 import { registerTemplate } from "./Components/Nav-Bar/RegisterPage/registerView.js"
 import { homeTemplate } from "./Components/HomePage/homeView.js";
+import { loginTemplate } from "./Components/Nav-Bar/LoginPage/loginView.js";
+import { displayPage } from "./Utils/filters.js";
+import { editTemplate } from "./Components/HomePage/EditMoviePage/editView.js";
 
 
 const router = (event) => {
@@ -9,32 +12,27 @@ const router = (event) => {
     handleLocation();
 };
 
-const routes = {    
-    "/":homeTemplate,
+const routes = {
+    "/": homeTemplate,
     "/home": "../app.html",
-    "/register": registerTemplate ,
-    "/login": "",
-    "/logout": ""
+    "/register": registerTemplate,
+    "/login": loginTemplate,
+    "/logout": "",
+    "/edit": editTemplate
 };
-const handleLocation = async() => { 
+
+const handleLocation = async () => {
+
     const path = window.location.pathname;
-        
+
     const route = routes[path] || routes[404];
-     if(route && route !== "/") {
-      // const html = await fetch(route).then(x => x.text())//Fragment
-    
-        document.getElementById("spa-page").innerHTML = routes[path]()
-     }
-  
-     if(route === "/") {
-        console.log("The url is",window.location.href)
-        document.getElementById("main-page").innerHTML = routes[path]
-     }
+
+    displayPage(route())
+
+
 };
 
-window.addEventListener("popstate",router)
-
-window.addEventListener('load', router);
+window.addEventListener("popstate", router)
 
 
 export { router }
