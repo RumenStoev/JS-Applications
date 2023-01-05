@@ -142,6 +142,9 @@ let getMovieID = (data, byTitle) => Object.values(data).filter(movie => movie.ti
 
 let getDataCurrMovie = () => JSON.parse(sessionStorage.getItem("idMovie"))
 
+let accessToken = () => JSON.parse(sessionStorage.getItem("loginData")).accessToken
+
+
 
 export {
      getDataForm,
@@ -159,5 +162,6 @@ export {
      takeCurrentMovieID,
      getMovieID,
      getDataCurrMovie,
+     accessToken,
      likesTetmplate
 }
