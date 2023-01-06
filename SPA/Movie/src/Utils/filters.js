@@ -2,6 +2,51 @@ import { homeTemplate } from "../Components/HomePage/homeView.js"
 import { loginTemplate } from "../Components/Nav-Bar/LoginPage/loginView.js"
 import { detailsTemplate } from "../Components/HomePage/DetailsMoviePage/detailsView.js"
 
+//Variant of writing helper functions
+class HelperFnContainer {
+     constructor() {
+          this.data = {};
+     }
+    
+     insertFunctionInContainer(section,fnName,fn) {
+          if(this.data[section] === undefined) {
+               this.data[section] = {}
+          }
+          
+          if(this.data[section][fnName] === undefined) {
+               this.data[section][fnName] = {}
+          }
+
+          this.data[section][fnName] = {
+               "descriptionFn":"",
+               "implementFn":fn
+          }
+          
+     }
+   
+     describeFn(section,fnName,description) {
+          this.data[section][fnName]["descriptionFn"]  = description
+     }
+      
+     searchFunctionInSection(section,fn) {
+          if(this.data[section] === undefined) {
+               return `There is no such ${section}`
+          }
+          if(fn === undefined) {
+               return this.data[section]
+          }
+          if(this.data[section].hasOwnProperty(fn)) {
+               return this.data[section][fn]
+          }else {
+               return `There is no ${fn} in section ${section}`
+          }
+     }
+}
+
+let container = new HelperFnContainer()
+window.container = container
+
+
 
 
 let getDataForm = async (formTag) => Object.fromEntries([...new FormData(formTag).entries()])
