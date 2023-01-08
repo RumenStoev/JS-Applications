@@ -48,6 +48,7 @@ window.container = container
 
 
 
+//////////////////////Form//////////////////////////////////////////
 
 let getDataForm = async (formTag) => Object.fromEntries([...new FormData(formTag).entries()])
 
@@ -76,6 +77,11 @@ let throwError = (msg) => {
      throw new Error(msg)
 }
 
+container.insertFunctionInContainer("form","isValidForm",isValidForm)
+container.describeFn("form","isValidForm","Check whether form inputs match to requirements (param as an Object)")
+//////////////////////////////////////////////////////////////////////////
+
+///////RedirectTo.../////////////////////////////////////////////////////
 
 let redirectToHomePage = (statusRequest) => {
 
@@ -89,6 +95,9 @@ let redirectToHomePage = (statusRequest) => {
      }
 }
 
+let redirectToLoginPage = () => displayPage(loginTemplate())
+
+/////////////////////////////////////////////////////////////////////
 
 let checkLoggedEmail = () => {
      let lastLoginEmail = JSON.parse(sessionStorage.getItem("loginData"));
@@ -97,8 +106,7 @@ let checkLoggedEmail = () => {
 }
 
 
-let redirectToLoginPage = () => displayPage(loginTemplate())
-
+////////RenderHTML///////////////////////////////////////////////////
 let displayPage = (pageContent) => {
 
      let fragment = document.createDocumentFragment();
@@ -133,11 +141,6 @@ let displayMovies = (containerMovies) => {
      }
 }
 
-let isLogged = () => (checkLoggedEmail() !== "email") ? "block" : "none"
-
-
-let takeCurrentMovie = (dataMovies, ownerId) => Object.values(dataMovies).filter(movie => movie._ownerId === ownerId)
-
 let movieNotCreatedByUser = () => `<a class="btn btn-primary" href="#"  id="likeBtn">Like</a>`
 
 
@@ -159,13 +162,21 @@ let likesTetmplate = (numberLikes) => {
      return `<span class="enrolled-span">Liked ${numberLikes}</span>`
 }
 
+let isLogged = () => (checkLoggedEmail() !== "email") ? "block" : "none"
+
+/////////////////////////////////////////////////////////////////////////
+
+/////////////////////Movie Filters//////////////////////////////////////////////
+
+let takeCurrentMovie = (dataMovies, ownerId) => Object.values(dataMovies).filter(movie => movie._ownerId === ownerId)
+
 
 let findMoviesLoggedUser = (dataMovies, text, idLi) => {
 
      let idUser = JSON.parse(sessionStorage.getItem("loginData"))._id;
      let ownerMovies = (arr, text) => Object.values(arr).filter(movie => movie.title === text).pop()
      let dataMovie = ownerMovies(dataMovies, text)
-     
+
      sessionStorage.setItem("idMovie", JSON.stringify({ movieId: dataMovie._id, userId: dataMovie._ownerId }))
 
      return (idUser === idLi) ? detailsTemplate(dataMovie, movieCreatedByUser)
@@ -181,13 +192,24 @@ let getParticularFilm = async (data, nameMovie) => {
      }).pop()
 }
 
-let takeCurrentMovieID = () => JSON.parse(sessionStorage.getItem("dataMovie"))._id
-
 let getMovieID = (data, byTitle) => Object.values(data).filter(movie => movie.title === byTitle).pop();
+
+
+//////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////SessionStorage////////////////////////////////////
+let takeCurrentMovieID = () => JSON.parse(sessionStorage.getItem("dataMovie"))._id
 
 let getDataCurrMovie = () => JSON.parse(sessionStorage.getItem("idMovie"))
 
 let accessToken = () => JSON.parse(sessionStorage.getItem("loginData")).accessToken
+
+/////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 
@@ -196,7 +218,6 @@ export {
      isValidForm,
      redirectToHomePage,
      checkLoggedEmail,
-     logoutUser,
      isLogged,
      redirectToLoginPage,
      displayPage,
@@ -208,5 +229,8 @@ export {
      getMovieID,
      getDataCurrMovie,
      accessToken,
-     likesTetmplate
+     likesTetmplate,
+     container
 }
+
+
