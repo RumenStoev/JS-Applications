@@ -1,4 +1,4 @@
-import { renderTowns } from "./renderTows.js";
+import { renderTowns } from "./renderTowns.js";
 
 
 
