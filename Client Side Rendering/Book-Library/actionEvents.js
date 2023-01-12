@@ -3,9 +3,9 @@ import { containerHelpers } from "./helpers.js";
 
 
 class InputsAction {
-    constructor(serviceRequest, inputValue) {
+    constructor(serviceRequest, helperService) {
         this.serviceRequest = serviceRequest
-        this.inputData = inputValue
+        this.helperService = helperService
     }
 
     async createBook() {
@@ -16,18 +16,40 @@ class InputsAction {
 
     }
 
+    async addBook(tagForm) {
+
+        let dataForm = await this.helperService.form().getDataForm(tagForm)
+        return await containerRequests
+            .createBook(dataForm)
+            .catch(console.error)
+    }
+
+    async saveUpdateBook(currentForm,target) {
+        let idStudent = target.id
+          console.log(idStudent)
+        let editFormData = await this.helperService.form().getDataForm(currentForm)
+            return await containerRequests
+                            .updateBook(editFormData,idStudent)
+                            .catch(console.error)
+    }
 }
 
 
 
 class ButtonsAction {
-    constructor(serviceRequest, inputData) {
+    constructor(serviceRequest, helperService) {
         this.serviceRequest = serviceRequest;
-        this.inputData = inputData;
+        this.helperService = helperService;
     }
 
     async allBooksLoad() {
-        return await containerHelpers.displayStateDOM(await containerHelpers.renderTable())
+        return await containerHelpers
+            .displayStateDOM(await containerHelpers.renderTable())
+    }
+
+    async displayEditForm(currentRow) {
+        let dataRow = this.helperService.getDataRow(currentRow)
+         return await this.helperService.displayEdit(dataRow)
     }
 
 
@@ -35,8 +57,8 @@ class ButtonsAction {
 
 
 let actions = {
-    "inputs": new InputsAction(containerRequests),
-    "buttons": new ButtonsAction(containerRequests)
+    "inputs": new InputsAction(containerRequests, containerHelpers),
+    "buttons": new ButtonsAction(containerRequests,containerHelpers)
 }
 
 
