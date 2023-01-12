@@ -26,7 +26,7 @@ class InputsAction {
 
     async saveUpdateBook(currentForm,target) {
         let idStudent = target.id
-          console.log(idStudent)
+         
         let editFormData = await this.helperService.form().getDataForm(currentForm)
             return await containerRequests
                             .updateBook(editFormData,idStudent)
