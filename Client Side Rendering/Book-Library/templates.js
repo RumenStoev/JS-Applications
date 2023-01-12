@@ -3,7 +3,8 @@
 let createTable = (tBody) => {
     return ` 
           <button id="loadBooks">LOAD ALL BOOKS</button>
-            <table>
+           
+           <table>
                <thead>
                   <tr>
                     <th>Title</th>
@@ -28,9 +29,9 @@ let createTable = (tBody) => {
            `
 }
 
-let tBodyTemplate = ({author,title}) => {
+let tBodyTemplate = ({author,title,id}) => {
    return `
-            <tr>
+            <tr id="${id}">
                 <td>${title}</td>
                 <td>${author}g</td>
                 <td>
@@ -42,16 +43,17 @@ let tBodyTemplate = ({author,title}) => {
 }
 
 
-let editFormTemplate = () => {
-   return `<form id="add-form">
-               <h3>Add book</h3>
-               <label>TITLE</label>
-               <input type="text" name="title" placeholder="Title...">
-               <label>AUTHOR</label>
-               <input type="text" name="author" placeholder="Author...">
-               <input type="submit" value="Submit">
-          </form>`
+let editFormTemplate = ({author,title,id}) => {
+   return `
+   <form id="edit-form">
+     
+      <h3>Edit book</h3>
+      <label>TITLE</label>
+      <input type="text" name="title" placeholder="${title}">
+      <label>AUTHOR</label>
+      <input type="text" name="author" placeholder="${author}">
+      <input type="submit" value="Save" id="${id}">
+   </form>
+          `
 }
-
-
-export { createTable, tBodyTemplate }
+export { createTable, tBodyTemplate,editFormTemplate }
