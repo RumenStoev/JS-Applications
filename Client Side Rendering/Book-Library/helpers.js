@@ -29,7 +29,6 @@ class HelperFunctionality {
     }
 
     getDataRow(target) {
-        console.log("Target is", target)
         let currentRow = target.parentNode.parentNode;
 
         let [author, title] = Array.from(currentRow.children)
