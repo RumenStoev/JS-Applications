@@ -1,9 +1,7 @@
 
 class RequestsBooks {
     url = "http://localhost:3030/jsonstore/collections/books"
-    constructor() {
-
-    }
+   
 
     async getAllBooks() {
         return await fetch(this.url)
