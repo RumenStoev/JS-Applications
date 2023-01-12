@@ -1,3 +1,4 @@
+
 class RequestsBooks {
     url = "http://localhost:3030/jsonstore/collections/books"
     constructor() {
@@ -11,11 +12,13 @@ class RequestsBooks {
     }
 
     async createBook(dataBook) {
-        return await fetch(this.url + `/${id}`, {
+        return await fetch(this.url, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ...dataBook })
         })
+            .then(response => response.status)
+            .catch(this.catchError)
     }
 
 
@@ -25,11 +28,11 @@ class RequestsBooks {
             .catch(this.catchError)
     }
 
-    async updateBook(book) {
+    async updateBook(dataBook,id) {
         return await fetch(this.url + `/${id}`, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(book)
+            body: JSON.stringify(dataBook)
         })
     }
 
