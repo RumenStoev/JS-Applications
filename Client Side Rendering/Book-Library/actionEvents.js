@@ -24,32 +24,43 @@ class InputsAction {
             .catch(console.error)
     }
 
-    async saveUpdateBook(currentForm,target) {
+    async saveUpdateBook(currentForm, target) {
         let idStudent = target.id
-         
+
         let editFormData = await this.helperService.form().getDataForm(currentForm)
-            return await containerRequests
-                            .updateBook(editFormData,idStudent)
-                            .catch(console.error)
+        return await containerRequests
+            .updateBook(editFormData, idStudent)
+            .catch(console.error)
     }
 }
 
 
 
 class ButtonsAction {
-    constructor(serviceRequest, helperService) {
+    constructor(serviceRequest, serviceHelper) {
         this.serviceRequest = serviceRequest;
-        this.helperService = helperService;
+        this.serviceHelper = serviceHelper;
     }
 
     async allBooksLoad() {
-        return await containerHelpers
-            .displayStateDOM(await containerHelpers.renderTable())
+        
+        return this.serviceHelper
+            .displayStateDOM()
+            .displayFragment(await this.serviceHelper.displayStateDOM().displayTable())
     }
 
     async displayEditForm(currentRow) {
-        let dataRow = this.helperService.getDataRow(currentRow)
-         return await this.helperService.displayEdit(dataRow)
+        
+        let dataRow = this.serviceHelper.table().getDataRow(currentRow);
+        return this.serviceHelper.displayStateDOM().displayEdit(dataRow)
+    }
+
+    async deleteBook(target) {
+        let id = this.serviceHelper.table().getStudentID(target)
+     
+        return await containerRequests
+            .deleteBook(id)
+            .catch(console.error)
     }
 
 
@@ -58,7 +69,7 @@ class ButtonsAction {
 
 let actions = {
     "inputs": new InputsAction(containerRequests, containerHelpers),
-    "buttons": new ButtonsAction(containerRequests,containerHelpers)
+    "buttons": new ButtonsAction(containerRequests, containerHelpers)
 }
 
 
