@@ -1,7 +1,8 @@
 
+
 class RequestsBooks {
     url = "http://localhost:3030/jsonstore/collections/books"
-   
+
 
     async getAllBooks() {
         return await fetch(this.url)
@@ -26,12 +27,21 @@ class RequestsBooks {
             .catch(this.catchError)
     }
 
-    async updateBook(dataBook,id) {
+    async updateBook(dataBook, id) {
         return await fetch(this.url + `/${id}`, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dataBook)
         })
+            .catch(this.catchError)
+    }
+
+    async deleteBook(id) {
+        return await fetch(this.url + `/${id}`, {
+            method: "DELETE",
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .catch(this.catchError)
     }
 
 
