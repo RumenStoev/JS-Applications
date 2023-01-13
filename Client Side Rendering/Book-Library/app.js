@@ -2,7 +2,11 @@ import { containerHelpers } from "./helpers.js";
 import { actions } from "./actionEvents.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    await containerHelpers.displayStateDOM(await containerHelpers.renderTable())
+    
+    let stateTable = await containerHelpers.displayStateDOM().displayTable()
+    containerHelpers
+        .displayStateDOM()
+        .displayFragment(stateTable)
 
     document.addEventListener("click", (event) => {
         event.preventDefault();
@@ -24,10 +28,10 @@ let clickByTagName = {
     INPUT: (target) => {
         let getInputByValue = target.value;
         let formTag = target.parentNode
-       
+
         let inputTargets = {
-            "Submit": async() => await actions.inputs.addBook(formTag),
-            "Save": async() => await actions.inputs.saveUpdateBook(formTag,target)
+            "Submit": async () => await actions.inputs.addBook(formTag),
+            "Save": async () => await actions.inputs.saveUpdateBook(formTag, target)
 
         }
 
@@ -37,13 +41,12 @@ let clickByTagName = {
 
     BUTTON: (target) => {
         let getBtnByContext = target.textContent;
-        
+
         let buttons = {
-            "Submit": () => { },
             "LOAD ALL BOOKS": async () => await actions.buttons.allBooksLoad(),
-            "Edit": async(target) => await actions.buttons.displayEditForm(target),
-            "Delete": () => console.log(`delete`),
-            
+            "Edit": async (target) => await actions.buttons.displayEditForm(target),
+            "Delete": async (target) => await actions.buttons.deleteBook(target),
+
         }
 
         return buttons[getBtnByContext](target)
