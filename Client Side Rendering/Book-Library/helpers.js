@@ -1,9 +1,12 @@
-import { createTable, tBodyTemplate, editFormTemplate } from "./templates.js";
+import { containerTemplates } from "./templates.js";
 import { containerRequests } from "./requests.js";
 
 
 class HelperFunctionality {
-
+    constructor(serviceRequest, serviceTemplate) {
+        this.serviceRequest = serviceRequest
+        this.serviceTemplate = serviceTemplate
+    }
 
     form() {
         return {
@@ -28,53 +31,75 @@ class HelperFunctionality {
         }
     }
 
-    getDataRow(target) {
-        let currentRow = target.parentNode.parentNode;
+    table() {
+        return {
+            "getDataRow": (target) => {
+                let currentRow = target.parentNode.parentNode;
 
-        let [author, title] = Array.from(currentRow.children)
-        let id = currentRow.id;
-        console.log(author)
+                let [author, title] = Array.from(currentRow.children)
+                let id = currentRow.id;
+            
 
-        return { author: author.textContent, title: title.textContent, id: id }
+                return { author: author.textContent, title: title.textContent, id: id }
+            },
+
+            "renderRow":  (data) => {
+                let rows = ""
+
+                Object.entries(data).forEach(([id, { author, title }]) => rows += this.serviceTemplate.tBodyTemplate({ author, title, id }))
+
+                return  rows
+            },
+
+
+
+            "getStudentID": (targetTag) => {
+                let idStudent = targetTag.parentNode.parentNode.id;
+                return idStudent
+
+            }
+        }
+
+
     }
 
-    async renderTable() {
-        return await containerRequests
-            .getAllBooks()
-            .then(this.renderRow)
-            .then(createTable)
-            .catch(console.error)
+    displayStateDOM() {
+        return {
+            "displayFragment": (data) => {
+                let fragmentDOM = document.createDocumentFragment()
+                fragmentDOM.innerHTML = data
+                document.body.innerHTML = fragmentDOM.innerHTML
+            },
+
+
+            "displayTable": async () => {
+                return await this.serviceRequest
+                    .getAllBooks()
+                    .then(this.table().renderRow)
+                    .then(this.serviceTemplate.createTable)
+                    .catch(console.error)
+            },
+
+            "displayEdit": ({ author, title, id }) => {
+
+                let formTarget = document.getElementById("add-form");
+                formTarget.innerHTML = this.serviceTemplate.editFormTemplate({ author, title, id })
+            }
+        }
     }
-
-    async renderRow(data) {
-        let rows = ""
-        
-        Object.entries(data).forEach(([id, { author, title }]) => rows += tBodyTemplate({ author, title, id }))
-
-        return rows
-
-
-    }
-
-    displayEdit({ author, title, id }) {
-
-        let formTarget = document.getElementById("add-form");
-        formTarget.innerHTML = editFormTemplate({ author, title, id })
-    }
-
-    async displayStateDOM(data) {
-        document.body.innerHTML = data
-    }
-
 
 }
 
 
-let containerHelpers = new HelperFunctionality()
+let containerHelpers = new HelperFunctionality(containerRequests, containerTemplates)
 
 export {
     containerHelpers
 }
+
+
+
+
 
 
 
