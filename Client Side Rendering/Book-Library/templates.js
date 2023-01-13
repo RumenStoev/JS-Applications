@@ -1,10 +1,10 @@
 
+class TemplateContainer {
 
-let createTable = (tBody) => {
-    return ` 
+   createTable = (tBody) => {
+      return ` 
           <button id="loadBooks">LOAD ALL BOOKS</button>
-           
-           <table>
+            <table>
                <thead>
                   <tr>
                     <th>Title</th>
@@ -13,7 +13,7 @@ let createTable = (tBody) => {
                  </tr>
                </thead>
                 <tbody>
-                  ${ tBody }
+                  ${tBody}
                 <tbody>
            </table>
            
@@ -27,10 +27,9 @@ let createTable = (tBody) => {
        </form>  
            
            `
-}
-
-let tBodyTemplate = ({author,title,id}) => {
-   return `
+   }
+   tBodyTemplate = ({ author, title, id }) => {
+      return `
             <tr id="${id}">
                 <td>${title}</td>
                 <td>${author}g</td>
@@ -40,11 +39,10 @@ let tBodyTemplate = ({author,title,id}) => {
                </td>
             </tr>
           `
-}
+   }
 
-
-let editFormTemplate = ({author,title,id}) => {
-   return `
+   editFormTemplate = ({ author, title, id }) => {
+      return `
    <form id="edit-form">
      
       <h3>Edit book</h3>
@@ -55,5 +53,10 @@ let editFormTemplate = ({author,title,id}) => {
       <input type="submit" value="Save" id="${id}">
    </form>
           `
+   }
+
 }
-export { createTable, tBodyTemplate,editFormTemplate }
+
+let containerTemplates = new TemplateContainer()
+
+export { containerTemplates }
