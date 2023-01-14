@@ -15,7 +15,7 @@ class HelperFunctionality {
                 const dataForm = [...new FormData(tagForm).entries()]
 
                 
-                return (this.checkIsEmptyForm(dataForm)) ? Object.fromEntries(dataForm) : this.throwErrorForm("Has empty field!!!")
+                return (this.checkIsEmptyForm(dataForm)) ? Object.fromEntries(dataForm) : this.throwErrorForm("Empty Field/s!!!")
 
 
             },
