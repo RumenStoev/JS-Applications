@@ -16,7 +16,7 @@ const handleLocation = () => {
 
     const path = window.location.pathname;
 
-    const route = routerPaths[path] || routerPaths[404];
+    const route = routerPaths[path] || pageNotFound
 
     displayPage(route())
 
@@ -26,11 +26,12 @@ function RouterWay(path, cbTemplate) {
     routerPaths[path] = cbTemplate
 }
 
+let pageNotFound = () => `<h1> The page Not Found! </h1>`
 
 
 
  window.addEventListener("popstate", Router);
-
+ window.addEventListener("load", Router)
 
 
 
