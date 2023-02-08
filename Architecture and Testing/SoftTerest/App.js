@@ -1,5 +1,6 @@
 import { Router } from "./EngineApp/RouterConfig.js"
 
+
 document.addEventListener("DOMContentLoaded", (e) => {
 
     document.addEventListener("click", (e) => {
@@ -8,5 +9,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         Router()
     })
 
-    Router()
+    document.addEventListener("submit", (e) => {
+
+    })
 })
