@@ -1,5 +1,5 @@
 import { displayPage } from "./displayDOM.js";
-import { routerPaths } from "./RouterWay.js";
+import { routerPaths } from "./RouterWays.js";
 
 const Router = (event) => {
 
@@ -9,10 +9,10 @@ const Router = (event) => {
 
     window.history.pushState({}, "", event.target.href);
 
-    handleLocation();
+    findLocation();
 };
 
-const handleLocation = () => {
+const findLocation = () => {
 
     const path = window.location.pathname;
 
@@ -22,17 +22,18 @@ const handleLocation = () => {
 
 };
 
+
+let pageNotFound = () => `<h1> The page Not Found! </h1>`
+
 function RouterWay(path, cbTemplate) {
     routerPaths[path] = cbTemplate
 }
 
-let pageNotFound = () => `<h1> The page Not Found! </h1>`
 
 
-
- window.addEventListener("popstate", Router);
- window.addEventListener("load", Router)
-
+window.addEventListener("popstate", Router);
+window.addEventListener("load", Router)
+window.addEventListener("click", Router)
 
 
 export { Router, RouterWay }
