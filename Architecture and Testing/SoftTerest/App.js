@@ -1,15 +1,15 @@
-import { Router } from "./EngineApp/RouterConfig.js"
+import { Router } from "./EngineApp/RouterEngine.js";
 
-
-document.addEventListener("DOMContentLoaded", (e) => {
+document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("click", (e) => {
         e.preventDefault();
-
-        Router()
+  
     })
 
     document.addEventListener("submit", (e) => {
-
+        e.preventDefault()
     })
+
+    
 })
