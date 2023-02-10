@@ -29,11 +29,14 @@ function RouterWay(path, cbTemplate) {
     routerPaths[path] = cbTemplate
 }
 
+function navigationLinks(event) {
+    if(event.target.href) Router() 
+}
 
 
 window.addEventListener("popstate", Router);
 window.addEventListener("load", Router)
-window.addEventListener("click", Router)
+window.addEventListener("click",navigationLinks)
 
 
 export { Router, RouterWay }
