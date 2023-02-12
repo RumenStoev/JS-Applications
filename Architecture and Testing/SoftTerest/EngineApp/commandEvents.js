@@ -1,26 +1,22 @@
-class ClickEvents {
-    constructor(event) { 
-        this.event = event
+import { RegisterUser } from "../Components/registerService.js"
+
+function ClickedEventByText() {
+    
+    return {
+        "Sign Up": (_event) => RegisterUser(_event)
     }
 
-  
 }
 
 
-class SubmitEvents {
-    constructor() { }
-}
+function SubmitEvent(event) {
 
- 
-
-
-function eventTrigger(event) {
-       
 }
 
 
+export { ClickedEventByText }
 
-export { eventTrigger }
+
 
 
 
