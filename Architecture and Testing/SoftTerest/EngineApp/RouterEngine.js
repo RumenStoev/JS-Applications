@@ -25,18 +25,23 @@ const findLocation = () => {
 
 let pageNotFound = () => `<h1> The page Not Found! </h1>`
 
-function RouterWay(path, cbTemplate) {
+ function RouterWay(path, cbTemplate) {
     routerPaths[path] = cbTemplate
-}
+  }
 
-function navigationLinks(event) {
-    if(event.target.href) Router() 
-}
+ function navigationLinks(event) {
+    if (event.target.href) Router()
+ }
+
+ function reditectTo(path,cbTemplate) {
+     window.history.replaceState({},"",path)
+     displayPage(cbTemplate())
+ }
 
 
 window.addEventListener("popstate", Router);
 window.addEventListener("load", Router)
-window.addEventListener("click",navigationLinks)
+window.addEventListener("click", navigationLinks)
 
 
-export { Router, RouterWay }
+export { Router, RouterWay,reditectTo }
