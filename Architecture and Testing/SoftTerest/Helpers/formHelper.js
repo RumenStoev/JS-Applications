@@ -14,7 +14,7 @@ class FormFunctionality {
 
     checkIsEmptyForm() {
 
-        (this.formData.every((input, index, arr) => arr[index][1] !== "")) ? this.formData : this.throwFormError(_,"Fill the Form")
+        (this.formData.every((input, index, arr) => arr[index][1] !== "")) ? this.formData : this.throwFormError(_, "Fill the Form")
 
         return this;
     }
@@ -26,25 +26,41 @@ class FormFunctionality {
         }
     }
     checkValidations() {
-      this.formData.forEach((field, i, arr) => {
+        this.formData.forEach((field, i, arr) => {
             let [key, value] = field
             let password = arr[1][1]
 
-            if (!this.validations()[key](value, password)) this.throwFormError(key,`Fill correct the Form ${key}`)
+            if (!this.validations()[key](value, password)) {
+                this.clearAllInputs()
+                this.throwFormError(key, `Fill correct the Form ${key}`)
+            }
         })
-        
-         return this;
-    }
-     
-       formDataToObject() {
-         return Object.fromEntries(this.formData)
-     }
 
-     
-     throwFormError(data,message) {
+        return this;
+    }
+
+    formDataToObject() {
+        return Object.fromEntries(this.formData)
+    }
+
+
+    throwFormError(data, message) {
         throw new Error(`Form Error ${data} -> ${message}`)
-     }
+    }
+
+    clearAllInputs() {
+
+        [...this.formTag.elements].forEach(item => item.value = "")
+
+        return this;
+    }
+
 }
+
+
+
+
+
 
 
 
