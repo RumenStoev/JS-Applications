@@ -4,7 +4,7 @@ import { reditectTo } from "../EngineApp/RouterEngine.js";
 import { homePageView } from "../Views/HomePageView.js";
 
 async function LoginUser(target) {
-   let formTag = target.parentNode.parentNode
+   let formTag = target
 
    let formData = new FormFunctionality(formTag)
                                   .getDataForm()
