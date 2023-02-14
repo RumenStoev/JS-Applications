@@ -1,24 +1,26 @@
 import { RegisterUser } from "../Components/registerService.js"
+import { LoginUser } from "../Components/loginService.js"
 
 function ClickedEventByText() {
-    
+
     return {
-        "Sign Up": (_event) => RegisterUser(_event)
+        
     }
 
 }
 
 
-function SubmitEvent(event) {
-
+function SubmitEvent() {
+    return {
+        "Sign Up": (_event) => RegisterUser(_event),
+        "Sign In": (_event) => LoginUser(_event)
+    }
 }
 
 
-export { ClickedEventByText }
 
 
-
-
+export { ClickedEventByText, SubmitEvent }
 
 
 
