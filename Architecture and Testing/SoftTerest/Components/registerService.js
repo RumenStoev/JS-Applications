@@ -6,7 +6,7 @@ import { homePageView } from "../Views/HomePageView.js"
 
 
 async function RegisterUser(target) {
-     let formTag = target.parentNode
+     let formTag = target
      
      let dataForm = new FormFunctionality(formTag)
                                         .getDataForm()
