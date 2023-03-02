@@ -55,15 +55,7 @@ describe('E2E tests', function () {
 
         await context.route('**' + endpoints.ideas, route => route.fulfill(json(mockData.ideas)));
         await context.route('**' + endpoints.details + '*', route => route.fulfill(json(mockData.details)));
-        // Block external calls
-        /*
-        await context.route(url => url.href.slice(0, host.length) != host, route => {
-            if (DEBUG) {
-                console.log('aborting', route.request().url());
-            }
-            route.abort();
-        });
-        */
+       
 
         page = await context.newPage();
     });
