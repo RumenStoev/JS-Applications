@@ -1,11 +1,13 @@
 
 import { displayPage } from "./displayDOM.js";
-import { routerPaths } from "./RouterWays.js";
+
+
+export const routerPaths = {};
 
 const Router = (event) => {
 
     event = event || window.event;
-
+    
     event.preventDefault();
 
     window.history.pushState({}, "", event.target.href);
@@ -14,9 +16,9 @@ const Router = (event) => {
 };
 
 const findLocation = (event) => {
-    
+
     event.preventDefault()
-    
+
     const path = window.location.pathname;
 
     const route = routerPaths[path] || pageNotFound
