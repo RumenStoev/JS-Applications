@@ -34,6 +34,9 @@ function RouterWay(path, cbTemplate) {
     routerPaths[path] = cbTemplate
 
 }
+function navigationHref(event) {
+    if(event.target.href) Router(event)
+}
 
 function reditectTo(path, cbTemplate) {
     window.history.replaceState({}, "", path)
@@ -44,7 +47,7 @@ function reditectTo(path, cbTemplate) {
 
 window.addEventListener("popstate", findLocation);
 window.addEventListener("load", Router)
-window.addEventListener("click", Router)
+window.addEventListener("click", navigationHref)
 
 
 export { Router, RouterWay, reditectTo }
