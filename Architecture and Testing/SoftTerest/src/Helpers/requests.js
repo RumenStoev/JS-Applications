@@ -3,48 +3,24 @@ import { setLocaleStorage, getAccessToken, InitObjBuilder } from "./requestHelpe
 
 let server = `http://localhost:3030`
 
-// async function registerUser(data) {
-
-//     try {
-//         let request = fetch(server + `/users/register`, {
-//             method: "POST",
-//             headers: { "Content-Type": "application/json" },
-//             body: JSON.stringify(data)
-//         })
-
-//         if ((await request).ok) setLocaleStorage('registerUser', await (await request).json())
-
-//         return (await request).status
-
-//     } catch (e) {
-
-//         throw new Error(e)
-//     }
-
-// }
-
-async function requestServer(urlPath, initObj) {
-    try {
-        let request = await fetch(server + urlPath, initObj)
-
-        if (request.ok) {
-            return request.status
-        }
-    } catch (e) {
-        throw new Error(e)
-    }
-}
-
-
 async function registerUser(data) {
 
-    return await requestServer(`/users/register`, new InitObjBuilder()
-   
-        .setMethod("POST")
-        .setHeader({ "Content-Type": "application/json" })
-        .setBody(JSON.stringify(data)) // The problem: Take object 
-        .build()
-    )
+    try {
+        let request = fetch(server + `/users/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+
+        if ((await request).ok) setLocaleStorage('registerUser', await (await request).json())
+
+        return (await request).status
+
+    } catch (e) {
+
+        throw new Error(e)
+    }
+
 }
 
 
